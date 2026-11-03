@@ -2,18 +2,22 @@
  * Video configuration for Devon Stank-style cinematic video presentation.
  * Uses the local videos placed inside `frontend/public/` (back.mp4 & bakcs.mp4).
  */
+const publicBase = import.meta.env.BASE_URL.replace(/\/$/, "");
+const backVideoUrl = `${publicBase}/back.mp4`;
+const bakcsVideoUrl = `${publicBase}/bakcs.mp4`;
+
 export const VIDEO_CONFIG = {
   // Background videos for the home screen
   heroVideos: [
-    { id: "back", label: "Scene 01", url: "/back.mp4" },
-    { id: "bakcs", label: "Scene 02", url: "/bakcs.mp4" },
+    { id: "back", label: "Scene 01", url: backVideoUrl },
+    { id: "bakcs", label: "Scene 02", url: bakcsVideoUrl },
   ],
-  heroVideoUrl: "/back.mp4",
-  secondaryVideoUrl: "/bakcs.mp4",
+  heroVideoUrl: backVideoUrl,
+  secondaryVideoUrl: bakcsVideoUrl,
 
   // Video Introduction Modal (Dedicated player with sound & controls)
-  introVideoUrl: "/bakcs.mp4",
-  alternateIntroVideoUrl: "/back.mp4",
+  introVideoUrl: bakcsVideoUrl,
+  alternateIntroVideoUrl: backVideoUrl,
 
   // Captions (optional WebVTT file)
   captionsUrl: "",
