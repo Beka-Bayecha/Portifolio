@@ -34,35 +34,34 @@ const App = () => {
         <AnimatePresence mode="wait">
           {isLoading ? (
             <LoadingScreen key="loading" onComplete={() => setIsLoading(false)} />
-          ) : (
-            <BrowserRouter key="app">
-              <Routes>
-                {/* Portfolio */}
-                <Route path="/" element={<Index />} />
-
-                {/* Admin */}
-                <Route path="/admin/login" element={<Login />} />
-                <Route
-                  path="/admin"
-                  element={
-                    <ProtectedRoute>
-                      <AdminLayout />
-                    </ProtectedRoute>
-                  }
-                >
-                  <Route index element={<Dashboard />} />
-                  <Route path="projects" element={<AdminProjects />} />
-                  <Route path="certificates" element={<AdminCertificates />} />
-                  <Route path="skills" element={<AdminSkills />} />
-                  <Route path="services" element={<AdminServices />} />
-                  <Route path="messages" element={<AdminMessages />} />
-                </Route>
-
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
-          )}
+          ) : null}
         </AnimatePresence>
+        <BrowserRouter>
+          <Routes>
+            {/* Portfolio */}
+            <Route path="/" element={<Index />} />
+
+            {/* Admin */}
+            <Route path="/admin/login" element={<Login />} />
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute>
+                  <AdminLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<Dashboard />} />
+              <Route path="projects" element={<AdminProjects />} />
+              <Route path="certificates" element={<AdminCertificates />} />
+              <Route path="skills" element={<AdminSkills />} />
+              <Route path="services" element={<AdminServices />} />
+              <Route path="messages" element={<AdminMessages />} />
+            </Route>
+
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
       </TooltipProvider>
     </AuthProvider>
   );

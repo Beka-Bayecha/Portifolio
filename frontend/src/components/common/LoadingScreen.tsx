@@ -9,25 +9,48 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
   const [progress, setProgress] = useState(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const doneRef = useRef(false);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
+    const publicBase = import.meta.env.BASE_URL.replace(/\/$/, "");
+    const videoUrl = `${publicBase}/back.mp4`;
+    const video = document.createElement("video");
+    const startedAt = Date.now();
+
+    const finish = () => {
+      if (doneRef.current) return;
+      doneRef.current = true;
+      if (intervalRef.current) clearInterval(intervalRef.current);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
+      const remainingMinimumTime = Math.max(0, 700 - (Date.now() - startedAt));
+      window.setTimeout(onComplete, remainingMinimumTime + 200);
+    };
+
     intervalRef.current = setInterval(() => {
-      setProgress((prev) => {
-        const next = prev + Math.random() * 12 + 6;
-        if (next >= 100) {
-          if (intervalRef.current) clearInterval(intervalRef.current);
-          if (!doneRef.current) {
-            doneRef.current = true;
-            setTimeout(() => onComplete(), 400);
-          }
-          return 100;
-        }
-        return next;
-      });
-    }, 80);
+      setProgress((prev) => Math.min(prev + 4, 88));
+    }, 100);
+
+    video.preload = "auto";
+    video.muted = true;
+    video.playsInline = true;
+    video.src = videoUrl;
+    video.addEventListener("loadeddata", () => {
+      setProgress(100);
+      finish();
+    }, { once: true });
+    video.load();
+
+    timeoutRef.current = setTimeout(() => {
+      setProgress(100);
+      finish();
+    }, 12000);
 
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      video.removeAttribute("src");
+      video.load();
     };
   }, [onComplete]);
 
