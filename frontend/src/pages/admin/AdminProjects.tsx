@@ -6,15 +6,20 @@ import { patchProjectGithubUrls } from "@/lib/seed";
 import { Loader2, GitBranch, FolderKanban, CheckCircle } from "lucide-react";
 
 const fields: FieldDef[] = [
-  { key: "order", label: "Order", type: "number", placeholder: "0" },
-  { key: "title", label: "Title", type: "text", placeholder: "Project title" },
-  { key: "subtitle", label: "Subtitle", type: "text", placeholder: "e.g. Enterprise Administration Platform" },
-  { key: "description", label: "Description", type: "textarea", placeholder: "Short description..." },
-  { key: "tech", label: "Tech Stack (press Enter to add)", type: "tags" },
-  { key: "imageKey", label: "Image Key", type: "select", options: ["church", "school", "port"] },
+  { key: "order", label: "Display Order", type: "number", placeholder: "0" },
+  { key: "title", label: "Project Title", type: "text", placeholder: "e.g. Shino Church Platform" },
+  { key: "subtitle", label: "Subtitle / Role", type: "text", placeholder: "e.g. Enterprise Administration Platform" },
+  {
+    key: "imageUrl",
+    label: "Project Image / Screenshot",
+    type: "image",
+    helperText: "Upload image from gallery or device",
+  },
+  { key: "description", label: "Description", type: "textarea", placeholder: "Short description of the system…" },
+  { key: "tech", label: "Technologies (press Enter to add)", type: "tags" },
   { key: "liveUrl", label: "Live URL", type: "text", placeholder: "https://..." },
-  { key: "githubUrl", label: "GitHub URL", type: "text", placeholder: "https://github.com/..." },
-  { key: "upcoming", label: "Upcoming / Coming Soon", type: "toggle" },
+  { key: "githubUrl", label: "GitHub URL", type: "text", placeholder: "https://github.com/bekibayecha/..." },
+  { key: "upcoming", label: "Upcoming / In Development", type: "toggle" },
 ];
 
 const AdminProjects = () => {
@@ -43,16 +48,18 @@ const AdminProjects = () => {
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="flex items-start justify-between gap-4"
+        className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-slate-200 dark:border-white/10"
       >
         <div className="flex items-center gap-3.5">
-          <div className="w-10 h-10 rounded-xl bg-blue-500/10 dark:bg-blue-500/15 flex items-center justify-center flex-shrink-0">
-            <FolderKanban size={18} className="text-blue-600 dark:text-blue-400" />
+          <div className="w-10 h-10 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-black flex items-center justify-center flex-shrink-0 shadow-sm">
+            <FolderKanban size={18} />
           </div>
           <div>
-            <h1 className="font-heading text-xl font-bold">Projects</h1>
-            <p className="text-xs text-muted-foreground mt-0.5">
-              Manage your portfolio projects
+            <h1 className="font-heading text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
+              Projects Management
+            </h1>
+            <p className="text-xs text-slate-500 dark:text-zinc-400 font-mono mt-0.5">
+              Add screenshots from gallery, configure live links & tech stacks
             </p>
           </div>
         </div>
@@ -60,7 +67,7 @@ const AdminProjects = () => {
         <button
           onClick={handlePatch}
           disabled={patching}
-          className="flex items-center gap-2 px-3.5 py-2 rounded-xl border border-border/80 bg-card text-sm font-medium hover:bg-secondary transition-colors disabled:opacity-60 flex-shrink-0"
+          className="flex items-center gap-2 px-3.5 py-2 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#14151a] text-slate-800 dark:text-zinc-200 text-xs font-mono font-medium hover:bg-slate-50 dark:hover:bg-white/5 transition-colors disabled:opacity-60 flex-shrink-0 shadow-sm"
         >
           {patching ? (
             <Loader2 size={13} className="animate-spin" />
@@ -69,7 +76,7 @@ const AdminProjects = () => {
           ) : (
             <GitBranch size={13} />
           )}
-          {patchDone ? "GitHub URLs updated!" : "Fix GitHub URLs"}
+          {patchDone ? "GitHub URLs updated!" : "Sync GitHub URLs"}
         </button>
       </motion.div>
 
@@ -77,7 +84,7 @@ const AdminProjects = () => {
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.08 }}
-        className="bg-card border border-border/60 rounded-2xl p-6 card-shadow"
+        className="bg-white dark:bg-[#111216] border border-slate-200 dark:border-white/10 rounded-2xl p-6 shadow-sm"
       >
         <CollectionTable
           collectionName="projects"

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import ThemeToggle from "@/components/common/ThemeToggle";
+import logoEmblem from "@/assets/logo-emblem.png";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -44,14 +45,18 @@ export const Navbar = () => {
       }`}
     >
       <div className="container mx-auto px-6 sm:px-10 flex items-center justify-between">
-        {/* Brand / Monogram */}
-        <a href="#home" className="group flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-slate-900 text-white dark:bg-white dark:text-black font-heading font-black text-xs flex items-center justify-center tracking-wider transition-transform group-hover:scale-105 shadow-sm">
-            BB
+        {/* Brand / Custom Logo */}
+        <a href="#home" className="group flex items-center gap-3.5">
+          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-black dark:bg-transparent p-1.5 flex items-center justify-center transition-all duration-300 group-hover:scale-105 flex-shrink-0 shadow-sm dark:shadow-none">
+            <img
+              src={logoEmblem}
+              alt="Beka Bayecha"
+              className="w-full h-full object-contain"
+            />
           </div>
           <div className="flex flex-col">
             <span
-              className={`font-heading font-bold text-sm sm:text-base tracking-wider uppercase transition-colors ${
+              className={`font-heading font-extrabold text-base sm:text-lg tracking-wider uppercase transition-colors ${
                 scrolled
                   ? "text-slate-900 dark:text-white"
                   : "text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
@@ -60,10 +65,10 @@ export const Navbar = () => {
               Beka Bayecha
             </span>
             <span
-              className={`text-[10px] font-medium tracking-widest uppercase ${
+              className={`text-[10px] sm:text-[11px] font-mono font-medium tracking-widest uppercase ${
                 scrolled
                   ? "text-slate-500 dark:text-zinc-400"
-                  : "text-zinc-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+                  : "text-zinc-300 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
               }`}
             >
               Full-Stack Developer

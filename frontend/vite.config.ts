@@ -17,25 +17,34 @@ export default defineConfig({
     {
       name: 'copy-favicon',
       buildStart() {
-        // Copy beki.jpg from assets to public as favicon files
         try {
           const publicDir = path.resolve(__dirname, 'public');
           if (!existsSync(publicDir)) {
             mkdirSync(publicDir, { recursive: true });
           }
-          const sourceFile = path.resolve(__dirname, 'src/assets/beki.jpg');
-          const faviconJpg = path.resolve(publicDir, 'favicon.jpg');
-          const bekiJpg = path.resolve(publicDir, 'beki.jpg');
+          const sourceLogo = path.resolve(__dirname, 'src/assets/logo.png');
+          const sourceFavicon = path.resolve(__dirname, 'src/assets/favicon.png');
+          const sourceEmblem = path.resolve(__dirname, 'src/assets/logo-emblem.png');
+          const destLogo = path.resolve(publicDir, 'logo.png');
+          const destFavicon = path.resolve(publicDir, 'favicon.png');
+          const destApple = path.resolve(publicDir, 'apple-touch-icon.png');
+          const destEmblem = path.resolve(publicDir, 'logo-emblem.png');
+          const bePng = path.resolve(publicDir, 'be.png');
           
-          if (existsSync(sourceFile)) {
-            copyFileSync(sourceFile, faviconJpg);
-            copyFileSync(sourceFile, bekiJpg);
-            console.log('✅ Favicon copied from assets/beki.jpg to public/favicon.jpg and public/beki.jpg');
-          } else {
-            console.warn('⚠️ Source file not found:', sourceFile);
+          if (existsSync(sourceFavicon)) {
+            copyFileSync(sourceFavicon, destFavicon);
+            copyFileSync(sourceFavicon, destApple);
+            copyFileSync(sourceFavicon, bePng);
           }
-        } catch (error) {
-          console.warn('⚠️ Could not copy favicon:', error.message);
+          if (existsSync(sourceLogo)) {
+            copyFileSync(sourceLogo, destLogo);
+          }
+          if (existsSync(sourceEmblem)) {
+            copyFileSync(sourceEmblem, destEmblem);
+          }
+          console.log('✅ Black background favicon and logo copied to public directory');
+        } catch (error: unknown) {
+          console.warn('⚠️ Could not copy favicon:', (error as Error)?.message);
         }
       }
     }

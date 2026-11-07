@@ -4,9 +4,11 @@ import { useAdminCollection } from "@/hooks/useAdminCollection";
 import { Wrench } from "lucide-react";
 
 const fields: FieldDef[] = [
-  { key: "order", label: "Order", type: "number", placeholder: "0" },
+  { key: "order", label: "Display Order", type: "number", placeholder: "0" },
   {
-    key: "icon", label: "Icon", type: "select",
+    key: "icon",
+    label: "Service Icon",
+    type: "select",
     options: [
       "Globe", "Server", "Smartphone", "Palette",
       "Code2", "Database", "Cloud", "Shield", "Cpu", "Layout", "Terminal",
@@ -15,11 +17,11 @@ const fields: FieldDef[] = [
       "Monitor", "Headphones", "Bot", "Rocket", "Star", "Settings",
     ],
   },
-  { key: "title", label: "Title", type: "text", placeholder: "Service title" },
-  { key: "desc", label: "Description", type: "textarea", placeholder: "Short description..." },
+  { key: "title", label: "Service Title", type: "text", placeholder: "e.g. Full-Stack Web Architecture" },
+  { key: "desc", label: "Scope & Description", type: "textarea", placeholder: "Detailed scope, deliverables, and architecture guarantees…" },
 ];
 
-const AdminServices = () => {
+export const AdminServices = () => {
   const { data, loading, refresh } = useAdminCollection("services");
 
   return (
@@ -29,15 +31,17 @@ const AdminServices = () => {
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="flex items-center gap-3.5"
+        className="flex items-center gap-3.5 pb-2 border-b border-slate-200 dark:border-white/10"
       >
-        <div className="w-10 h-10 rounded-xl bg-emerald-500/10 dark:bg-emerald-500/15 flex items-center justify-center flex-shrink-0">
-          <Wrench size={18} className="text-emerald-600 dark:text-emerald-400" />
+        <div className="w-10 h-10 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-black flex items-center justify-center flex-shrink-0 shadow-sm">
+          <Wrench size={18} />
         </div>
         <div>
-          <h1 className="font-heading text-xl font-bold">Services</h1>
-          <p className="text-xs text-muted-foreground mt-0.5">
-            Manage the services you offer to clients
+          <h1 className="font-heading text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
+            Engineering Services
+          </h1>
+          <p className="text-xs text-slate-500 dark:text-zinc-400 font-mono mt-0.5">
+            Configure solutions, architectural offerings, and delivery standards
           </p>
         </div>
       </motion.div>
@@ -46,7 +50,7 @@ const AdminServices = () => {
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.08 }}
-        className="bg-card border border-border/60 rounded-2xl p-6 card-shadow"
+        className="bg-white dark:bg-[#111216] border border-slate-200 dark:border-white/10 rounded-2xl p-6 shadow-sm"
       >
         <CollectionTable
           collectionName="services"

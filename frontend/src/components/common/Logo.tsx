@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import bekiImage from "@/assets/beki.jpg";
+import logoEmblem from "@/assets/logo-emblem.png";
 
 interface LogoProps {
   size?: "sm" | "md" | "lg" | "xl";
@@ -10,13 +10,13 @@ interface LogoProps {
 }
 
 const sizeClasses = {
-  sm: "w-8 h-8",
-  md: "w-10 h-10", 
-  lg: "w-12 h-12",
-  xl: "w-20 h-20"
+  sm: "w-10 h-10",
+  md: "w-14 h-14", 
+  lg: "w-18 h-18",
+  xl: "w-24 h-24"
 };
 
-const Logo = ({ 
+export const Logo = ({ 
   size = "md", 
   showText = true, 
   showSubtitle = false,
@@ -38,48 +38,30 @@ const Logo = ({
   } : {};
 
   return (
-    <div className={`flex items-center gap-3 ${className}`}>
+    <div className={`flex items-center gap-3.5 ${className}`}>
       <LogoImage
-        className={`${sizeClasses[size]} rounded-full overflow-hidden border-2 border-primary/20 shadow-lg relative group cursor-pointer`}
+        className={`${sizeClasses[size]} rounded-2xl bg-black dark:bg-transparent p-1.5 flex items-center justify-center flex-shrink-0 transition-colors shadow-sm dark:shadow-none relative group cursor-pointer`}
         {...imageProps}
       >
-        {/* Gradient overlay for modern effect */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
-        
-        {/* Profile image */}
         <img 
-          src={bekiImage} 
-          alt="Beka Bayecha" 
-          className="w-full h-full object-cover object-center"
+          src={logoEmblem} 
+          alt="Beka Bayecha Logo" 
+          className="w-full h-full object-contain"
         />
-        
-        {/* Subtle ring animation */}
-        {animated && (
-          <motion.div
-            className="absolute inset-0 rounded-full border-2 border-primary/30"
-            animate={{ 
-              scale: [1, 1.1, 1],
-              opacity: [0.3, 0.6, 0.3]
-            }}
-            transition={{ 
-              duration: 2, 
-              repeat: Infinity, 
-              ease: "easeInOut" 
-            }}
-          />
-        )}
       </LogoImage>
       
       {showText && (
         <div className="flex flex-col">
           <LogoText 
-            className="font-heading font-bold text-xl gradient-text"
+            className="font-heading font-extrabold text-base sm:text-lg text-slate-900 dark:text-white tracking-wider uppercase leading-tight"
             {...textProps}
           >
-            Beka Bayecha <span className="text-foreground"></span>
+            Beka Bayecha
           </LogoText>
           {showSubtitle && (
-            <span className="text-xs text-muted-foreground">Full Stack Developer</span>
+            <span className="text-[10px] font-mono text-slate-500 dark:text-zinc-400 uppercase tracking-widest">
+              Full Stack Developer
+            </span>
           )}
         </div>
       )}

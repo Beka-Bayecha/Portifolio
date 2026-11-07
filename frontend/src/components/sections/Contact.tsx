@@ -14,7 +14,7 @@ const channels = [
   { icon: Mail,          label: "Email",    value: "bekibekinat@gmail.com", href: "mailto:bekibekinat@gmail.com" },
   { icon: Phone,         label: "Phone",    value: "+251 916 020 569",     href: "tel:0916020569" },
   { icon: MessageSquare, label: "WhatsApp", value: "+251 916 020 569",     href: "https://wa.me/251916020569" },
-  { icon: MessageCircle, label: "Telegram", value: "@beckya53",             href: "https://t.me/beckya53" },
+  { icon: MessageCircle, label: "Telegram", value: "@Elios53",             href: "https://t.me/Elios53" },
   { icon: GithubIcon,    label: "GitHub",   value: "Beka-Bayecha",          href: "https://github.com/Beka-Bayecha" },
 ];
 

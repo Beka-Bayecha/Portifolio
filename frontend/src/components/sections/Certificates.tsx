@@ -15,6 +15,8 @@ export interface Certificate {
   title: string;
   issuer: string;
   issueDate: string;
+  imageUrl?: string;
+  image?: string;
   credentialId?: string;
   credentialUrl?: string;
   category?: string;
@@ -125,9 +127,19 @@ export const Certificates = () => {
               className="p-6 rounded-2xl bg-slate-50 dark:bg-[#14151a] border border-slate-200 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/20 transition-all duration-300 flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer group shadow-sm hover:shadow-md"
             >
               <div className="flex items-start sm:items-center gap-4">
-                <div className="w-10 h-10 rounded-xl bg-slate-200/70 dark:bg-white/5 flex items-center justify-center text-slate-700 dark:text-zinc-400 group-hover:bg-slate-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors flex-shrink-0">
-                  <Award size={18} />
-                </div>
+                {cert.imageUrl || cert.image ? (
+                  <div className="w-12 h-12 rounded-xl overflow-hidden border border-slate-200 dark:border-white/10 flex-shrink-0 bg-slate-100 dark:bg-white/5">
+                    <img
+                      src={cert.imageUrl || cert.image}
+                      alt={cert.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                    />
+                  </div>
+                ) : (
+                  <div className="w-10 h-10 rounded-xl bg-slate-200/70 dark:bg-white/5 flex items-center justify-center text-slate-700 dark:text-zinc-400 group-hover:bg-slate-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors flex-shrink-0">
+                    <Award size={18} />
+                  </div>
+                )}
                 <div>
                   <h4 className="font-heading font-bold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-slate-950 dark:group-hover:text-zinc-200 transition-colors">
                     {cert.title}
@@ -180,6 +192,16 @@ export const Certificates = () => {
               <div className="w-12 h-12 rounded-full bg-slate-900 text-white dark:bg-white dark:text-black flex items-center justify-center mb-6 shadow-md">
                 <Award size={22} />
               </div>
+
+              {(selectedCert.imageUrl || selectedCert.image) && (
+                <div className="mb-6 rounded-xl overflow-hidden border border-slate-200 dark:border-white/10 max-h-56 bg-slate-100 dark:bg-white/5 shadow-inner">
+                  <img
+                    src={selectedCert.imageUrl || selectedCert.image}
+                    alt={selectedCert.title}
+                    className="w-full h-full object-contain max-h-52 mx-auto"
+                  />
+                </div>
+              )}
 
               <span className="text-xs font-mono text-slate-500 dark:text-zinc-400 uppercase tracking-widest block mb-1 font-medium">
                 {selectedCert.issuer}

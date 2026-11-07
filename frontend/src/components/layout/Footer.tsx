@@ -1,5 +1,6 @@
 import { ArrowUp, Mail, MessageCircle } from "lucide-react";
 import GithubIcon from "../icons/GithubIcon";
+import logoEmblem from "@/assets/logo-emblem.png";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -22,11 +23,15 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-slate-200 dark:border-white/10">
           {/* Brand Info */}
           <div className="md:col-span-6 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-slate-900 text-white dark:bg-white dark:text-black font-heading font-black text-xs flex items-center justify-center tracking-wider shadow-sm">
-                BB
+            <div className="flex items-center gap-3.5">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-black dark:bg-transparent p-1.5 flex items-center justify-center shadow-sm dark:shadow-none flex-shrink-0 transition-colors">
+                <img
+                  src={logoEmblem}
+                  alt="Beka Bayecha Logo"
+                  className="w-full h-full object-contain"
+                />
               </div>
-              <span className="font-heading font-extrabold text-xl tracking-wider uppercase text-slate-900 dark:text-white">
+              <span className="font-heading font-extrabold text-xl sm:text-2xl tracking-wider uppercase text-slate-900 dark:text-white">
                 Beka Bayecha
               </span>
             </div>
@@ -75,13 +80,13 @@ export const Footer = () => {
               </li>
               <li>
                 <a
-                  href="https://t.me/beckya53"
+                  href="https://t.me/Elios53"
                   target="_blank"
                   rel="noreferrer"
                   className="hover:text-slate-950 dark:hover:text-white transition-colors flex items-center gap-2"
                 >
                   <MessageCircle size={14} />
-                  <span>@beckya53</span>
+                  <span>@Elios53</span>
                 </a>
               </li>
               <li>

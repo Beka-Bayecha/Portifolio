@@ -13,7 +13,9 @@ interface FirestoreProject {
   title: string;
   description: string;
   tech: string[];
-  imageKey: string;
+  imageKey?: string;
+  imageUrl?: string;
+  image?: string;
   liveUrl: string;
   githubUrl: string;
   upcoming: boolean;
@@ -98,7 +100,12 @@ export const Projects = () => {
           <div className="space-y-24 sm:space-y-32">
             {projects.map((project, idx) => {
               const isEven = idx % 2 === 1;
-              const imageSrc = IMAGE_MAP[project.imageKey] ?? undefined;
+              const rawImg = project.imageUrl || project.image || project.imageKey;
+              const imageSrc =
+                (rawImg && IMAGE_MAP[rawImg]) ||
+                (rawImg && (rawImg.startsWith("data:") || rawImg.startsWith("http") || rawImg.startsWith("/"))
+                  ? rawImg
+                  : undefined);
               const technologies = project.tech ?? [];
 
               return (

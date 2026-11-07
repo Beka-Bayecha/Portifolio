@@ -9,7 +9,15 @@ const fields: FieldDef[] = [
   { key: "issuer", label: "Issuing Organization", type: "text", placeholder: "e.g. Meta, Coursera, Haramaya University" },
   { key: "issueDate", label: "Issue Date / Year", type: "text", placeholder: "e.g. May 2024 or 2024" },
   {
-    key: "category", label: "Category", type: "select",
+    key: "imageUrl",
+    label: "Certificate Image / Badge",
+    type: "image",
+    helperText: "Upload diploma, badge, or credential photo from gallery",
+  },
+  {
+    key: "category",
+    label: "Category",
+    type: "select",
     options: ["Full Stack", "Frontend", "Backend & Cloud", "Database", "Professional"],
   },
   { key: "credentialId", label: "Credential ID (Optional)", type: "text", placeholder: "e.g. META-FE-892410" },
@@ -29,15 +37,17 @@ const AdminCertificates = () => {
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="flex items-center gap-3.5"
+        className="flex items-center gap-3.5 pb-2 border-b border-slate-200 dark:border-white/10"
       >
-        <div className="w-10 h-10 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 flex items-center justify-center flex-shrink-0">
-          <Award size={18} className="text-amber-600 dark:text-amber-400" />
+        <div className="w-10 h-10 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-black flex items-center justify-center flex-shrink-0 shadow-sm">
+          <Award size={18} />
         </div>
         <div>
-          <h1 className="font-heading text-xl font-bold">Certificates & Credentials</h1>
-          <p className="text-xs text-muted-foreground mt-0.5">
-            Manage certifications, diplomas, awards and verification links
+          <h1 className="font-heading text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
+            Certificates & Credentials
+          </h1>
+          <p className="text-xs text-slate-500 dark:text-zinc-400 font-mono mt-0.5">
+            Upload certificate photos from gallery, manage credentials and verify links
           </p>
         </div>
       </motion.div>
@@ -46,7 +56,7 @@ const AdminCertificates = () => {
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.08 }}
-        className="bg-card border border-border/60 rounded-2xl p-6 card-shadow"
+        className="bg-white dark:bg-[#111216] border border-slate-200 dark:border-white/10 rounded-2xl p-6 shadow-sm"
       >
         <CollectionTable
           collectionName="certificates"
